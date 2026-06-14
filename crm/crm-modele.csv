@@ -1,0 +1,2 @@
+id,nom_agence,ville,contact_nom,contact_prenom,contact_email,contact_telephone,statut_pipeline,date_dernier_contact,prochaine_action,prochaine_action_date,assigné_à,tags,source_lead,date_creation,notes
+AG001,Agence du Marché,Paris,Martin,Sophie,sophie.martin@agencedumarche.fr,01 23 45 67 89,Contactée,2026-06-14,Relance email J+3,2026-06-17,Donopot,réseau;paris;5-10 agents,PagesJaunes,2026-06-01,Directrice d'agence. Semble intéressée par le Pack Réponse Lead.
