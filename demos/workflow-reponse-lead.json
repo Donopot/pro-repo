@@ -1,0 +1,122 @@
+{
+  "name": "Réponse Lead — Agence Immobilière",
+  "description": "Webhook → qualification → CRM → email → relance. Pack Réponse Lead.",
+  "modules": [
+    {
+      "id": 1,
+      "type": "webhook",
+      "label": "Réception formulaire",
+      "method": "POST",
+      "response_type": "json",
+      "sample_payload": {
+        "name": "Sophie Martin",
+        "email": "s.martin@email.com",
+        "phone": "06 12 34 56 78",
+        "type": "estimation",
+        "property_type": "appartement",
+        "city": "Paris",
+        "postal_code": "75015",
+        "surface": 65,
+        "message": "Je souhaite estimer mon appartement.",
+        "source": "site-web"
+      }
+    },
+    {
+      "id": 2,
+      "type": "router",
+      "label": "Aiguillage type de demande",
+      "branches": [
+        { "condition": "type == estimation", "label": "Estimation" },
+        { "condition": "type == visite", "label": "Visite" },
+        { "condition": "type == vente", "label": "Vente" }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "pipedrive_search_persons",
+      "label": "Recherche doublon CRM",
+      "field": "email",
+      "term": "{{1.email}}",
+      "exact_match": true
+    },
+    {
+      "id": 4,
+      "type": "pipedrive_create_person",
+      "label": "Créer contact si nouveau",
+      "condition": "{{3.id}} is empty",
+      "name": "{{1.name}}",
+      "email": "{{1.email}}",
+      "phone": "{{1.phone}}",
+      "custom_fields": {
+        "source_lead": "{{1.source}}",
+        "type_bien": "{{1.property_type}}"
+      }
+    },
+    {
+      "id": 5,
+      "type": "pipedrive_create_deal",
+      "label": "Créer deal",
+      "title": "{{1.type}} — {{1.property_type}} — {{1.name}}",
+      "person_id": "{{or(3.id; 4.id)}}",
+      "pipeline": "Transactions immobilières",
+      "stage": "Nouveau lead",
+      "value": 0,
+      "owner_lookup": "table: postal_code → agent",
+      "custom_fields": {
+        "surface": "{{1.surface}}",
+        "ville": "{{1.city}}",
+        "code_postal": "{{1.postal_code}}"
+      }
+    },
+    {
+      "id": 6,
+      "type": "text_parser",
+      "label": "Composer email personnalisé",
+      "template": "email_reponse_lead.html",
+      "variables": ["name", "type", "property_type", "city", "agent_name", "agent_slug"]
+    },
+    {
+      "id": 7,
+      "type": "brevo_send_email",
+      "label": "Envoyer réponse",
+      "to": "{{1.email}}",
+      "subject": "{{6.subject}}",
+      "html": "{{6.html}}",
+      "sender": "{{agent_email}}"
+    },
+    {
+      "id": 8,
+      "type": "pipedrive_create_note",
+      "label": "Noter envoi dans CRM",
+      "deal_id": "{{5.id}}",
+      "content": "📨 Réponse automatique envoyée — {{formatDate now \"DD/MM/YYYY HH:mm\"}}"
+    },
+    {
+      "id": 9,
+      "type": "sleep",
+      "label": "Attente 48h",
+      "delay_seconds": 172800
+    },
+    {
+      "id": 10,
+      "type": "pipedrive_get_deal",
+      "label": "Vérifier statut lead",
+      "deal_id": "{{5.id}}"
+    },
+    {
+      "id": 11,
+      "type": "brevo_send_email",
+      "label": "Relance si pas de réponse",
+      "condition": "{{10.stage}} == \"Nouveau lead\"",
+      "to": "{{1.email}}",
+      "subject": "Suite à votre demande — {{1.type}} {{1.city}}",
+      "template": "email_relance_lead.html"
+    }
+  ],
+  "error_handling": {
+    "on_api_failure": "retry 3 times, interval 5 min, then alert",
+    "on_invalid_payload": "return 400 with error message",
+    "alert_email": "donopot@pm.me"
+  },
+  "notes": "Ce blueprint est un modèle. Remplacer les IDs de pipeline/stage, les tables d'assignation agent, les templates d'email et les credentials API avant mise en production."
+}
