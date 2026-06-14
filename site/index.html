@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donopot — Automatisation IA pour agences immobilières</title>
+<meta name="description" content="J'automatise la réponse, la qualification et le suivi des leads pour les agences immobilières françaises. Sans recruter. Avec un cadrage RGPD clair.">
+<style>
+  /* ── Reset & Base ──────────────────────────── */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:16px}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,sans-serif;background:#0a0a0f;color:#d0d0d8;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:#a78bfa;text-decoration:none}
+  a:hover{color:#c4b5fd}
+  h1,h2,h3{color:#f0f0f5;line-height:1.3}
+  img{max-width:100%;display:block}
+
+  /* ── Layout ────────────────────────────────── */
+  .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+  section{padding:5rem 0}
+
+  /* ── Nav ──────────────────────────────────── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+  nav .container{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem}
+  .logo{font-weight:700;font-size:1.25rem;color:#f0f0f5}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{color:#b0b0ba;font-size:.9rem;transition:color .2s}
+  .nav-links a:hover{color:#fff}
+
+  /* ── Hero ──────────────────────────────────── */
+  .hero{padding:9rem 0 6rem;text-align:center}
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:1.25rem;background:linear-gradient(135deg,#a78bfa,#7dd3fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .hero p{font-size:1.15rem;max-width:650px;margin:0 auto 2.5rem;color:#a0a0b0}
+  .cta{display:inline-block;background:#6c5ce7;color:#fff;padding:.85rem 2.2rem;border-radius:8px;font-weight:600;font-size:1rem;transition:background .2s,transform .2s}
+  .cta:hover{background:#7c6cf7;color:#fff;transform:translateY(-1px)}
+
+  /* ── Section titles ───────────────────────── */
+  .section-title{text-align:center;margin-bottom:3.5rem}
+  .section-title h2{font-size:2rem;margin-bottom:.75rem}
+  .section-title p{color:#8888a0;max-width:550px;margin:0 auto}
+
+  /* ── Cards (Offres) ────────────────────────── */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.75rem}
+  .card{background:#141420;border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:2rem;transition:border-color .3s,transform .2s}
+  .card:hover{border-color:rgba(108,92,231,.3);transform:translateY(-2px)}
+  .card-icon{font-size:2rem;margin-bottom:1rem}
+  .card h3{font-size:1.2rem;margin-bottom:.5rem}
+  .card .price{color:#a78bfa;font-weight:700;font-size:1.1rem;margin:.75rem 0}
+  .card ul{list-style:none;color:#9898a8;font-size:.95rem}
+  .card li{margin-bottom:.5rem;padding-left:1.2rem;position:relative}
+  .card li::before{content:"→";position:absolute;left:0;color:#6c5ce7}
+
+  /* ── Niches ────────────────────────────────── */
+  .niche-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;text-align:center}
+  .stat-card{background:#141420;border-radius:12px;padding:2rem 1.5rem;border:1px solid rgba(255,255,255,.05)}
+  .stat-card .stat-num{font-size:2.2rem;font-weight:800;color:#a78bfa}
+  .stat-card p{color:#9898a8;margin-top:.5rem;font-size:.95rem}
+
+  /* ── Process ───────────────────────────────── */
+  .process{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.75rem}
+  .process-step{background:#141420;border-radius:12px;padding:2rem;text-align:center;border:1px solid rgba(255,255,255,.05);position:relative}
+  .step-num{display:inline-block;width:40px;height:40px;line-height:40px;border-radius:50%;background:#6c5ce7;color:#fff;font-weight:700;font-size:1.1rem;margin-bottom:1rem}
+  .process-step h3{margin-bottom:.5rem}
+  .process-step p{color:#9898a8;font-size:.95rem}
+
+  /* ── Contact ───────────────────────────────── */
+  .contact{text-align:center;background:linear-gradient(180deg,#0a0a0f,#141420);border-radius:16px;padding:4rem 2rem;margin-bottom:2rem}
+  .contact h2{font-size:2rem;margin-bottom:1rem}
+  .contact .cta{margin-top:1.5rem}
+  .contact-email{margin-top:1.5rem;color:#7878a0;font-size:.95rem}
+
+  /* ── Footer ────────────────────────────────── */
+  footer{text-align:center;padding:3rem 0 2rem;border-top:1px solid rgba(255,255,255,.05);color:#606078;font-size:.85rem}
+
+  /* ── Responsive ────────────────────────────── */
+  @media (max-width:768px){
+    nav .container{flex-direction:column;gap:.5rem}
+    .nav-links{gap:1rem}
+    .hero{padding:7rem 0 4rem}
+    .hero h1{font-size:1.8rem}
+    section{padding:3rem 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Nav ────────────────────────────────── -->
+<nav>
+  <div class="container">
+    <a href="#" class="logo">Donopot</a>
+    <ul class="nav-links">
+      <li><a href="#offres">Offres</a></li>
+      <li><a href="#pourquoi">Pourquoi l'immo</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <h1>Vos leads méritent une réponse en moins de 3 minutes</h1>
+    <p>
+      J'automatise la réponse, la qualification et le suivi des demandes entrantes
+      pour les agences immobilières françaises. Sans recruter. Avec un cadrage RGPD clair.
+    </p>
+    <a href="#contact" class="cta">Prendre un rendez-vous</a>
+  </div>
+</section>
+
+<!-- ── Offres ─────────────────────────────── -->
+<section id="offres">
+  <div class="container">
+    <div class="section-title">
+      <h2>Trois offres, zéro blabla</h2>
+      <p>Des packs fermés, livrés en 7 à 20 jours, avec maintenance incluse.</p>
+    </div>
+    <div class="cards">
+      <!-- Pack 1 -->
+      <div class="card">
+        <div class="card-icon">📨</div>
+        <h3>Pack Réponse Lead</h3>
+        <p style="color:#9898a8;font-size:.95rem">Chaque lead reçoit une réponse utile en moins de 3 minutes.</p>
+        <div class="price">2 500 – 4 500 €</div>
+        <ul>
+          <li>Réponse automatique personnalisée</li>
+          <li>Qualification + affectation au bon agent</li>
+          <li>Relances automatiques</li>
+          <li>Proposition de créneau + agenda</li>
+        </ul>
+      </div>
+      <!-- Pack 2 -->
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <h3>Pack Workflows CRM</h3>
+        <p style="color:#9898a8;font-size:.95rem">Un CRM qui se remplit tout seul, sans saisie manuelle.</p>
+        <div class="price">3 500 – 6 500 €</div>
+        <ul>
+          <li>Création / mise à jour automatique des fiches</li>
+          <li>Dédoublonnage et enrichissement</li>
+          <li>Pipeline commercial avec étapes et SLA</li>
+          <li>Tâches et rappels automatiques</li>
+        </ul>
+      </div>
+      <!-- Pack 3 -->
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>Pack Support Client IA</h3>
+        <p style="color:#9898a8;font-size:.95rem">Une première ligne de support qui tourne 24/7.</p>
+        <div class="price">4 500 – 8 500 €</div>
+        <ul>
+          <li>Triage et catégorisation des demandes</li>
+          <li>Réponse automatique depuis votre base documentaire</li>
+          <li>Handoff humain si nécessaire</li>
+          <li>Reporting mensuel + temps économisé</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pourquoi l'immobilier ──────────────── -->
+<section id="pourquoi">
+  <div class="container">
+    <div class="section-title">
+      <h2>Spécialiste agences immobilières</h2>
+      <p>Un secteur où la rapidité de réponse fait la différence entre un mandat signé et un lead perdu.</p>
+    </div>
+    <div class="niche-stats">
+      <div class="stat-card">
+        <div class="stat-num">83 000+</div>
+        <p>Agences immobilières en France</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">-40%</div>
+        <p>De leads perdus sans réponse sous 5 minutes</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">×3</div>
+        <p>Chances de conversion avec une réponse immédiate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ─────────────────────────────── -->
+<section id="process">
+  <div class="container">
+    <div class="section-title">
+      <h2>Simple, rapide, carré</h2>
+      <p>Un process en trois étapes, sans surprise.</p>
+    </div>
+    <div class="process">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h3>Audit cadré</h3>
+        <p>On cartographie vos flux, vos outils et vos volumes. 1 heure, zéro engagement.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h3>Build en 7-20 jours</h3>
+        <p>Automatisation livrée, testée et documentée. Recette incluse, hypercare 7 jours.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h3>Maintenance</h3>
+        <p>Supervision, correctifs, optimisations. Un rapport mensuel, une revue trimestrielle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact ─────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact">
+      <h2>On regarde vos flux ensemble ?</h2>
+      <p style="color:#a0a0b0;max-width:500px;margin:0 auto">
+        Réservez un créneau de 20 minutes. On cartographie votre processus actuel
+        et je vous dis ce qui est automatisable.
+      </p>
+      <a href="https://calendly.com/donopot" class="cta">Réserver un appel</a>
+      <p class="contact-email">ou écrivez-moi : donopot@pm.me</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────── -->
+<footer>
+  <div class="container">
+    <p>Donopot — Automatisation IA pour PME françaises</p>
+    <p style="margin-top:.25rem">Micro-entreprise · Cadrage RGPD · Maintenance incluse</p>
+  </div>
+</footer>
+
+</body>
+</html>
