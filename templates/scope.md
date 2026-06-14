@@ -78,6 +78,10 @@ facturée au temps passé (demi-journée ou journée).
 
 ## 7. Maintenance
 
+**Option retenue :** [Oui / Non]
+
+La présente section et l'Annexe 2 ne s'appliquent que si l'option est retenue dans le devis.
+
 La maintenance couvre :
 - Surveillance des workflows
 - Corrections en cas de dysfonctionnement
@@ -106,7 +110,7 @@ La maintenance ne couvre pas :
 | Poste | Montant |
 |-------|--------:|
 | Build | [X] € |
-| Maintenance mensuelle | [X] € / mois |
+| Maintenance mensuelle | [X] € / mois si option retenue |
 | **Total première année** | **[X] €** |
 
 Délai de livraison estimé : [X] jours ouvrés.

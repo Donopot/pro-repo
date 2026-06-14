@@ -2,6 +2,8 @@
 
 > **Annexe au contrat de prestation entre Donopot et [Client].**
 > **Date :** [JJ/MM/AAAA]
+>
+> Cette annexe s'applique uniquement si l'option de maintenance est retenue dans le devis.
 
 ---
 
@@ -15,7 +17,7 @@ La maintenance couvre les services suivants pour les automatisations livrées :
 | **Correctif** | Correction des dysfonctionnements et bugs |
 | **Ajustement** | Modifications mineures (changement de champ, destinataire, seuil, template) |
 | **Support** | Assistance par email, réponse sous 1 jour ouvré |
-| **Mise à jour** | Mise à jour des connecteurs et API des outils tiers |
+| **Mise à jour** | Adaptations mineures rendues nécessaires par les évolutions compatibles des outils tiers |
 | **Reporting** | Rapport mensuel d'activité (volumes, erreurs, temps économisé) |
 | **Optimisation** | 1 à 2 optimisations mineures incluses par mois |
 
@@ -31,8 +33,8 @@ La maintenance ne couvre pas :
 
 | Niveau | Définition | Exemple | Engagement |
 |--------|------------|---------|------------|
-| **P1 — Critique** | Interruption complète d'un workflow bloquant la réception ou le traitement des leads | Plus aucun lead ne remonte dans le CRM | Prise en charge sous **4 heures ouvrées**, résolution sous **8 heures ouvrées** |
-| **P2 — Dégradé** | Dysfonctionnement partiel, le service fonctionne mais avec dégradation | Relances automatiques incomplètes, erreur non bloquante | Prise en charge sous **1 jour ouvré**, résolution sous **3 jours ouvrés** |
+| **P1 — Critique** | Interruption complète d'un workflow bloquant la réception ou le traitement des leads | Plus aucun lead ne remonte dans le CRM | Prise en charge sous **4 heures ouvrées**, objectif de rétablissement ou contournement sous **8 heures ouvrées** |
+| **P2 — Dégradé** | Dysfonctionnement partiel, le service fonctionne mais avec dégradation | Relances automatiques incomplètes, erreur non bloquante | Prise en charge sous **1 jour ouvré**, objectif de rétablissement ou contournement sous **3 jours ouvrés** |
 | **P3 — Mineur** | Ajustement, correction cosmétique ou optimisation | Changement de template, modification de seuil | Planification sous **5 jours ouvrés** |
 
 ---
@@ -46,6 +48,11 @@ Le SLA s'entend sous réserve que :
   (ex : panne de l'API Pipedrive, interruption de service Brevo)
 - Aucune modification non documentée n'ait été réalisée côté Client
 - La demande soit transmise par le canal défini (email)
+
+Les délais sont suspendus pendant toute période où le Prestataire attend un accès,
+une validation ou une information nécessaire du Client ou d'un fournisseur tiers.
+Les objectifs de rétablissement peuvent être satisfaits par un contournement
+fonctionnel ; la correction définitive est ensuite planifiée avec le Client.
 
 ---
 
@@ -93,7 +100,7 @@ par tacite reconduction par période de 3 mois. Résiliation par préavis d'**1 
 | Pack Workflows CRM | 400 – 900 € |
 | Pack Support Client IA | 700 – 1 500 € |
 
-Le tarif définitif est fixé au contrat en fonction de la complexité du projet.
+Le tarif définitif et l'activation de l'option sont fixés dans le devis.
 
 ---
 

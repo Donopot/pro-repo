@@ -25,8 +25,10 @@ pro-repo/
 │   ├── audit.md        ← Trame d'audit
 │   ├── contrat.md      ← Contrat de prestation
 │   ├── annexe-rgpd.md  ← Annexe article 28 RGPD
-│   └── outreach.md     ← Scripts commerciaux
-└── .hermes/plans/      ← Plans d'exécution
+│   ├── sla.md           ← Annexe maintenance et SLA
+│   └── outreach.md      ← Scripts commerciaux
+├── scripts/             ← Validations locales et CI
+└── .github/workflows/   ← Validation et déploiement GitHub Pages
 ```
 
 ---
@@ -65,7 +67,7 @@ pro-repo/
 
 ## Positionnement
 
-**Spécialiste PME française, orienté résultats, cadré RGPD, livré en 10 à 20 jours.**
+**Spécialiste PME française, orienté résultats, cadré RGPD, livré en 7 à 30 jours selon le pack.**
 
 3 niches prioritaires :
 1. Agences immobilières
