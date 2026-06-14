@@ -8,7 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 HTML_FILE = ROOT / "site" / "index.html"
 PUBLIC_FILES = [HTML_FILE, ROOT / "README.md", ROOT / "AGENTS.md"]
-MARKDOWN_FILES = [ROOT / "README.md", ROOT / "AGENTS.md", *(ROOT / "templates").glob("*.md")]
+MARKDOWN_FILES = [ROOT / "README.md", ROOT / "AGENTS.md", *(ROOT / "templates").glob("*.md"), *(ROOT / "demos").glob("*.md")]
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
     "meta", "param", "source", "track", "wbr",
