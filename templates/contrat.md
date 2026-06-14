@@ -100,14 +100,9 @@ sauvegarde, procédure d'incident.
 
 ## Article 10 — SLA Maintenance (Annexe 2)
 
-| Niveau | Description | Engagement |
-|--------|-------------|------------|
-| **P1** | Interruption d'un workflow critique | Prise en charge sous 4h ouvrées |
-| **P2** | Dysfonctionnement dégradant le service | Prise en charge sous 1 jour ouvré |
-| **P3** | Ajustement mineur ou optimisation | Planification sous 5 jours ouvrés |
-
-Le SLA s'entend sous réserve que le Client fournisse les accès nécessaires
-et que l'incident ne provienne pas d'un tiers hors de contrôle du Prestataire.
+Les conditions détaillées de la maintenance et les niveaux de service (P1/P2/P3)
+sont définis dans l'**Annexe 2 — Conditions de maintenance et SLA**, qui fait
+partie intégrante du contrat.
 
 ---
 
