@@ -116,7 +116,8 @@ def validate_crm(errors):
         errors.append(f"crm/agences-cibles.csv: missing fields {sorted(missing)}")
 
     seen_ids = set()
-    seen_verified_contacts = set()
+    seen_emails = set()
+    seen_phones = set()
     for line_number, row in enumerate(targets, start=2):
         lead_id = row.get("id", "").strip()
         if not lead_id or lead_id in seen_ids:
@@ -127,14 +128,25 @@ def validate_crm(errors):
             errors.append(f"crm/agences-cibles.csv:{line_number}: target is not manually verified")
         if not all(row.get(field, "").strip() for field in ("source_url", "date_collecte", "date_verification")):
             errors.append(f"crm/agences-cibles.csv:{line_number}: target lacks source or verification dates")
-        if urlparse(row.get("source_url", "")).scheme not in {"http", "https"}:
+        source_url = row.get("source_url", "").strip()
+        parsed_source = urlparse(source_url)
+        if parsed_source.scheme not in {"http", "https"}:
             errors.append(f"crm/agences-cibles.csv:{line_number}: source_url must be an HTTP(S) URL")
-        contact_key = (row.get("email", "").strip().lower(), row.get("telephone", "").strip())
-        if not any(contact_key):
+        if parsed_source.netloc.lower() in {"google.com", "www.google.com"} and parsed_source.path.startswith("/maps/search"):
+            errors.append(f"crm/agences-cibles.csv:{line_number}: generic Google Maps search is not verification evidence")
+
+        email = row.get("email", "").strip().lower()
+        phone = row.get("telephone", "").strip()
+        if not email and not phone:
             errors.append(f"crm/agences-cibles.csv:{line_number}: target lacks contact details")
-        elif contact_key in seen_verified_contacts:
-            errors.append(f"crm/agences-cibles.csv:{line_number}: duplicate verified contact")
-        seen_verified_contacts.add(contact_key)
+        if email:
+            if email in seen_emails:
+                errors.append(f"crm/agences-cibles.csv:{line_number}: duplicate verified email")
+            seen_emails.add(email)
+        if phone:
+            if phone in seen_phones:
+                errors.append(f"crm/agences-cibles.csv:{line_number}: duplicate verified telephone")
+            seen_phones.add(phone)
 
         opposition = row.get("opposition", "").strip().lower()
         if opposition not in {"oui", "non"}:
@@ -142,7 +154,7 @@ def validate_crm(errors):
         if opposition == "oui" and row.get("statut", "").strip().lower() != "opposition":
             errors.append(f"crm/agences-cibles.csv:{line_number}: opposed target must have Opposition status")
 
-    model_fields, _ = read_csv(CRM_MODEL, errors)
+    model_fields, model_rows = read_csv(CRM_MODEL, errors)
     required_model_fields = {
         "source_url", "date_collecte", "date_information", "opposition",
         "opposition_date", "ne_plus_contacter", "motif_opposition",
@@ -150,6 +162,11 @@ def validate_crm(errors):
     missing = required_model_fields.difference(model_fields)
     if missing:
         errors.append(f"crm/crm-modele.csv: missing fields {sorted(missing)}")
+    for line_number, row in enumerate(model_rows, start=2):
+        if not row.get("id", "").startswith("EXEMPLE-"):
+            errors.append(f"crm/crm-modele.csv:{line_number}: template rows must be explicitly marked EXEMPLE-*")
+        if not row.get("contact_email", "").endswith(".invalid"):
+            errors.append(f"crm/crm-modele.csv:{line_number}: template email must use the reserved .invalid domain")
 
 
 def main():
