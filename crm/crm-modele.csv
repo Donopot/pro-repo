@@ -1,0 +1,2 @@
+id,nom_agence,ville,contact_nom,contact_prenom,contact_email,contact_telephone,statut_pipeline,date_dernier_contact,prochaine_action,prochaine_action_date,assigne_a,tags,source_url,date_collecte,date_information,opposition,opposition_date,ne_plus_contacter,motif_opposition,date_creation,notes
+EXEMPLE-001,Agence Exemple,Paris,Nom,Prénom,contact@example.invalid,0100000000,À qualifier,,Vérifier la source et la pertinence,,Donopot,exemple,https://example.invalid,2026-06-14,,Non,,Non,,2026-06-14,Ligne fictive à supprimer avant utilisation.

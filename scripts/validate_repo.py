@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
+import csv
 import re
 import sys
 
@@ -8,7 +9,9 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 HTML_FILE = ROOT / "site" / "index.html"
 PUBLIC_FILES = [HTML_FILE, ROOT / "README.md", ROOT / "AGENTS.md"]
-MARKDOWN_FILES = [ROOT / "README.md", ROOT / "AGENTS.md", *(ROOT / "templates").glob("*.md")]
+MARKDOWN_FILES = [ROOT / "README.md", ROOT / "AGENTS.md", *(ROOT / "templates").glob("*.md"), *(ROOT / "demos").glob("*.md")]
+CRM_TARGETS = ROOT / "crm" / "agences-cibles.csv"
+CRM_MODEL = ROOT / "crm" / "crm-modele.csv"
 VOID_ELEMENTS = {
     "area", "base", "br", "col", "embed", "hr", "img", "input", "link",
     "meta", "param", "source", "track", "wbr",
@@ -92,12 +95,70 @@ def validate_markdown(errors):
             errors.append(f"{path.relative_to(ROOT)}: missing level-one heading")
 
 
+def read_csv(path, errors):
+    try:
+        with path.open(newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            return reader.fieldnames or [], list(reader)
+    except (OSError, csv.Error) as exc:
+        errors.append(f"{path.relative_to(ROOT)}: invalid CSV: {exc}")
+        return [], []
+
+
+def validate_crm(errors):
+    target_fields, targets = read_csv(CRM_TARGETS, errors)
+    required_target_fields = {
+        "id", "nom", "email", "telephone", "source_url", "date_collecte",
+        "date_verification", "verification_status", "opposition", "opposition_date",
+    }
+    missing = required_target_fields.difference(target_fields)
+    if missing:
+        errors.append(f"crm/agences-cibles.csv: missing fields {sorted(missing)}")
+
+    seen_ids = set()
+    seen_verified_contacts = set()
+    for line_number, row in enumerate(targets, start=2):
+        lead_id = row.get("id", "").strip()
+        if not lead_id or lead_id in seen_ids:
+            errors.append(f"crm/agences-cibles.csv:{line_number}: missing or duplicate id")
+        seen_ids.add(lead_id)
+
+        if row.get("verification_status", "").strip().lower() != "verifie":
+            errors.append(f"crm/agences-cibles.csv:{line_number}: target is not manually verified")
+        if not all(row.get(field, "").strip() for field in ("source_url", "date_collecte", "date_verification")):
+            errors.append(f"crm/agences-cibles.csv:{line_number}: target lacks source or verification dates")
+        if urlparse(row.get("source_url", "")).scheme not in {"http", "https"}:
+            errors.append(f"crm/agences-cibles.csv:{line_number}: source_url must be an HTTP(S) URL")
+        contact_key = (row.get("email", "").strip().lower(), row.get("telephone", "").strip())
+        if not any(contact_key):
+            errors.append(f"crm/agences-cibles.csv:{line_number}: target lacks contact details")
+        elif contact_key in seen_verified_contacts:
+            errors.append(f"crm/agences-cibles.csv:{line_number}: duplicate verified contact")
+        seen_verified_contacts.add(contact_key)
+
+        opposition = row.get("opposition", "").strip().lower()
+        if opposition not in {"oui", "non"}:
+            errors.append(f"crm/agences-cibles.csv:{line_number}: opposition must be Oui or Non")
+        if opposition == "oui" and row.get("statut", "").strip().lower() != "opposition":
+            errors.append(f"crm/agences-cibles.csv:{line_number}: opposed target must have Opposition status")
+
+    model_fields, _ = read_csv(CRM_MODEL, errors)
+    required_model_fields = {
+        "source_url", "date_collecte", "date_information", "opposition",
+        "opposition_date", "ne_plus_contacter", "motif_opposition",
+    }
+    missing = required_model_fields.difference(model_fields)
+    if missing:
+        errors.append(f"crm/crm-modele.csv: missing fields {sorted(missing)}")
+
+
 def main():
     errors = []
     validate_html(errors)
     validate_public_content(errors)
     validate_links(errors)
     validate_markdown(errors)
+    validate_crm(errors)
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors))
         return 1
