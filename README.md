@@ -28,7 +28,7 @@ Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensu
 
 1. **Audit cadré** — on cartographie vos flux et vos outils (1h)
 2. **Build** — automatisation livrée, testée, documentée (7 à 30 jours selon le pack)
-3. **Maintenance** — supervision, correctifs, optimisations continues
+3. **Maintenance en option** — supervision, correctifs et optimisations continues
 
 ---
 
@@ -46,4 +46,12 @@ Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensu
 
 ---
 
-*Spécialiste PME française — orienté résultats — livré en 10 à 20 jours.*
+## Publication du site
+
+La landing page est validée puis déployée par GitHub Actions après chaque push sur
+`main`. Le dépôt doit utiliser **GitHub Actions** comme source dans
+`Settings → Pages → Build and deployment`.
+
+---
+
+*Spécialiste PME française — orienté résultats — livré en 7 à 30 jours selon le pack.*

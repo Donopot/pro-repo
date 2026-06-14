@@ -1,85 +1,55 @@
-name: Validate
+name: Validate and deploy
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Validate HTML
-        run: |
-          sudo apt-get install -y html5validator 2>/dev/null || true
-          # Basic HTML check: ensure all tags are balanced, no broken structure
-          python3 -c "
-          import re, sys
-          html = open('site/index.html').read()
-          # Check balanced tags (crude but catches most issues)
-          tags = re.findall(r'<(/?\w+)', html)
-          stack = []
-          void_elements = {'meta','link','img','input','br','hr'}
-          for tag in tags:
-              if tag.startswith('/'):
-                  if not stack:
-                      print(f'ERROR: Closing tag </{tag[1:]}> without opening tag')
-                      sys.exit(1)
-                  expected = stack.pop()
-                  if expected != tag[1:]:
-                      print(f'ERROR: Expected </{expected}>, found </{tag[1:]}>')
-              elif tag not in void_elements:
-                  stack.insert(0, tag)
-          if stack:
-              print(f'WARNING: Unclosed tags: {stack}')
-          else:
-              print('✅ HTML structure valid')
-          "
+      - name: Validate repository content
+        run: python3 scripts/validate_repo.py
 
-      - name: Check for unreplaced placeholders
+      - name: Check public links
         run: |
-          echo "=== Checking for unreplaced [placeholders] ==="
-          PLACEHOLDERS=$(grep -rn '\[À compléter\]\|\[JJ/MM/AAAA\]\|\[Raison sociale\]\|\[X\]' templates/ site/ README.md 2>/dev/null || true)
-          if [ -n "$PLACEHOLDERS" ]; then
-            echo "ℹ️  Placeholders found (expected in templates — verify before client delivery):"
-            echo "$PLACEHOLDERS"
-          else
-            echo "✅ No placeholders"
-          fi
-
-      - name: Check dead links
-        run: |
-          echo "=== Checking links in Markdown files ==="
-          # Extract HTTP/HTTPS URLs and check them
-          URLS=$(grep -rohP 'https?://[^\s\)]+' templates/ site/ README.md AGENTS.md 2>/dev/null | sort -u || true)
+          mapfile -t URLS < <(grep -rhoE 'https?://[^"[:space:])>]+' site README.md AGENTS.md | sort -u)
           DEAD=0
-          for url in $URLS; do
-            # Skip placeholder URLs
-            case "$url" in
-              *calendly.com/donopot*|*linkedin.com/in/donopot*) continue ;;
-              *github.com/Donopot*|*cnil.fr*|*service-public.fr*|*legifrance*|*insee.fr*) continue ;;
-              *donopot@*|*.pm.me) continue ;;
-            esac
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 5 "$url" 2>/dev/null || echo "000")
-            if [ "$STATUS" = "000" ] || [ "$STATUS" -ge 400 ]; then
-              echo "⚠️  $url → HTTP $STATUS"
+          for url in "${URLS[@]}"; do
+            STATUS=$(curl -L -s -o /dev/null -w "%{http_code}" --retry 2 --connect-timeout 10 --max-time 30 "$url" || true)
+            if [ "$STATUS" = "000" ] || [ "$STATUS" = "404" ] || [ "$STATUS" = "410" ] || { [ "$STATUS" -ge 500 ] && [ "$STATUS" != "999" ]; }; then
+              echo "ERROR: $url returned HTTP $STATUS"
               DEAD=1
+            else
+              echo "OK: $url returned HTTP $STATUS"
             fi
           done
-          if [ "$DEAD" -eq 0 ]; then
-            echo "✅ All links reachable (or skipped as known placeholders)"
-          fi
+          exit "$DEAD"
 
-      - name: Markdown lint (structure check)
-        run: |
-          echo "=== Basic Markdown structure check ==="
-          for f in templates/*.md README.md AGENTS.md; do
-            if [ -f "$f" ]; then
-              HEADERS=$(grep -c '^#' "$f" || true)
-              echo "  $f: $HEADERS sections"
-            fi
-          done
-          echo "✅ Markdown files have section headers"
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v5

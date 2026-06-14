@@ -29,7 +29,7 @@
 | Poste | Prix HT |
 |-------|--------:|
 | Build (livraison sous [X] jours ouvrés) | [X] € |
-| Maintenance mensuelle (engagement 3 mois min.) | [X] € / mois |
+| Maintenance mensuelle | [Retenue / Non retenue] — [X] € / mois si retenue |
 | **Total build HT** | **[X] €** |
 
 ---
@@ -38,7 +38,7 @@
 
 - **Acompte :** 30 % à la signature, soit [X] €
 - **Solde :** 70 % à la recette, soit [X] €
-- **Maintenance :** prélèvement mensuel à compter du mois suivant la recette
+- **Maintenance :** uniquement si retenue ci-dessus, prélèvement mensuel à compter du mois suivant la recette
 
 ---
 
@@ -61,7 +61,7 @@ Le présent devis est indissociable des documents suivants, remis avec le contra
 | Annexe | Document |
 |--------|----------|
 | Annexe 1 | Document de Périmètre (scope détaillé + scénarios de recette) |
-| Annexe 2 | Conditions de maintenance et SLA |
+| Annexe 2 | Conditions de maintenance et SLA — applicable uniquement si la maintenance est retenue |
 | Annexe 3 | Annexe RGPD — Article 28 |
 
 ---

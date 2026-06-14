@@ -34,7 +34,7 @@ intégrante du contrat.
 Le Prestataire s'engage à :
 - Livrer les automatisations conformément au périmètre défini
 - Documenter les workflows et fournir une prise en main
-- Assurer la maintenance selon les SLA définis en Annexe 2
+- Assurer la maintenance selon l'Annexe 2 uniquement si cette option est retenue dans le devis
 - Respecter les obligations du RGPD en tant que sous-traitant (cf. Annexe 3)
 
 ---
@@ -54,7 +54,7 @@ Le Client s'engage à :
 Les prix sont définis dans le devis joint. Modalités :
 - Acompte de 30 % à la signature
 - Solde de 70 % à la recette
-- Maintenance : prélèvement mensuel à terme échu
+- Maintenance optionnelle : prélèvement mensuel à terme échu uniquement si elle est retenue dans le devis
 - Pénalités de retard : 3 fois le taux d'intérêt légal
 
 ---
@@ -100,9 +100,10 @@ sauvegarde, procédure d'incident.
 
 ## Article 10 — SLA Maintenance (Annexe 2)
 
-Les conditions détaillées de la maintenance et les niveaux de service (P1/P2/P3)
-sont définis dans l'**Annexe 2 — Conditions de maintenance et SLA**, qui fait
-partie intégrante du contrat.
+Si la maintenance est retenue dans le devis, ses conditions détaillées et les
+niveaux de service (P1/P2/P3) sont définis dans l'**Annexe 2 — Conditions de
+maintenance et SLA**, qui fait partie intégrante du contrat. Dans le cas contraire,
+aucun engagement de maintenance ou de SLA ne s'applique après l'hypercare.
 
 ---
 
@@ -126,8 +127,8 @@ le Client puisse respecter son obligation de notification à la CNIL sous 72h.
 ## Article 13 — Durée et résiliation
 
 Le contrat prend effet à la date de signature.
-La maintenance est conclue pour une durée initiale de 3 mois, renouvelable
-par tacite reconduction par période de 3 mois.
+Lorsqu'elle est retenue dans le devis, la maintenance est conclue pour une durée
+initiale de 3 mois, renouvelable par tacite reconduction par période de 3 mois.
 
 Résiliation par l'une ou l'autre partie : préavis de 1 mois par lettre recommandée.
 
