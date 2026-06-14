@@ -89,10 +89,12 @@ Dans Pipedrive > Paramètres > Webhooks :
 
 ### Variables d'environnement Make
 
-```
-PIPEDRIVE_API_TOKEN = xxx
-PIPEDRIVE_COMPANY_DOMAIN = agence-duport
-```
+| Variable | Exemple |
+|----------|---------|
+| `PIPEDRIVE_API_TOKEN` | `xxx` |
+| `PIPEDRIVE_COMPANY_DOMAIN` | `agence-duport` |
+
+> Dans Make, les variables se configurent via l'onglet « Variables » du scénario, pas avec la syntaxe `KEY=VALUE`.
 
 ---
 

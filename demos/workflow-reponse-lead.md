@@ -176,6 +176,11 @@ Résultat : `person_id` si trouvé, vide sinon.
 
 ### Module 6 — Text Parser (template email)
 
+> ⚠️ La syntaxe `{{if}}/{{elseif}}/{{endif}}` ci-dessous est du **pseudo-code**.
+> Dans Make, utiliser le module « Router » avant le Text Parser ou la fonction
+> `if()` dans le template. La logique conditionnelle dépend du moteur de template
+> utilisé côté Make.
+
 ```text
 Objet : {{if 1.type == "estimation"}}Votre demande d'estimation — {{1.property_type}} {{1.city}}{{elseif 1.type == "visite"}}Votre demande de visite — {{1.property_type}} {{1.city}}{{else}}Votre projet immobilier — {{1.city}}{{endif}}
 
@@ -238,7 +243,7 @@ Objet : Suite à votre demande d'estimation
 
 Bonjour {{1.name}},
 
-Je fais suite à mon message de mardi dernier concernant l'estimation
+Je fais suite à mon message concernant l'estimation
 de votre {{1.property_type}} à {{1.city}}.
 
 Avez-vous eu le temps d'y réfléchir ? Je reste disponible pour en discuter

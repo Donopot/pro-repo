@@ -118,5 +118,5 @@
     "on_invalid_payload": "return 400 with error message",
     "alert_email": "donopot@pm.me"
   },
-  "notes": "Ce blueprint est un modèle. Remplacer les IDs de pipeline/stage, les tables d'assignation agent, les templates d'email et les credentials API avant mise en production."
+  "notes": "⚠️ Ce fichier est un blueprint conceptuel, PAS un export Make importable directement. Les IDs de pipeline/stage, les tables d'assignation agent, les templates d'email et les credentials API doivent être configurés dans l'interface Make. Utiliser ce document comme spécification de référence pour reproduire le workflow."
 }
