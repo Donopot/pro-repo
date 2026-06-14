@@ -15,15 +15,15 @@
 | Comment faire estimer mon bien ? | Vous pouvez remplir notre formulaire d'estimation en ligne ou prendre rendez-vous avec un agent. L'estimation est gratuite et sans engagement. |
 | Combien coûte une estimation ? | L'estimation est entièrement gratuite. |
 | Combien de temps prend une estimation ? | Comptez 30 à 45 minutes pour une visite complète du bien. |
-| Quels documents fournir pour une estimation ? | Aucun document obligatoire. Le diagnostic technique (DPE) est utile mais pas indispensable. |
+| Quels documents fournir pour une estimation ? | [À valider avec l'agence : liste des documents demandés et caractère obligatoire ou facultatif.] |
 
 ### 🔑 Visite
 
 | Question | Réponse |
 |----------|---------|
 | Comment organiser une visite ? | Contactez l'agent en charge du bien ou réservez un créneau directement via le lien de l'annonce. |
-| Puis-je visiter le week-end ? | Oui, nos agents sont disponibles du lundi au samedi, 9h-19h. |
-| Faut-il une pièce d'identité pour visiter ? | Oui, une pièce d'identité vous sera demandée au début de la visite. |
+| Puis-je visiter le week-end ? | [À valider avec l'agence : jours et horaires de visite.] |
+| Faut-il une pièce d'identité pour visiter ? | [À valider avec l'agence : politique d'identification avant visite.] |
 | Puis-je être accompagné pendant la visite ? | Bien sûr, vous pouvez venir accompagné. |
 
 ### 📋 Mandat
@@ -31,9 +31,9 @@
 | Question | Réponse |
 |----------|---------|
 | Quels types de mandat proposez-vous ? | Mandat simple (non exclusif) et mandat exclusif. Le mandat exclusif inclut des services premium (photos pro, home staging, diffusion élargie). |
-| Quelle est la durée d'un mandat ? | 3 mois renouvelables pour un mandat simple, 6 mois pour un mandat exclusif. |
-| Quels sont vos honoraires ? | Nos honoraires sont compris entre 4% et 8% du prix de vente, selon le type de mandat et le montant de la transaction. Un devis précis vous sera fourni lors de la signature. |
-| Puis-je vendre moi-même sans commission ? | Uniquement en mandat simple. En mandat exclusif, toute vente pendant la durée du mandat donne lieu à honoraires. |
+| Quelle est la durée d'un mandat ? | [À valider avec l'agence : durées et modalités de renouvellement par type de mandat.] |
+| Quels sont vos honoraires ? | [À valider avec l'agence : barème d'honoraires applicable et lien vers le barème public.] |
+| Puis-je vendre moi-même sans commission ? | [À valider avec l'agence selon les clauses du mandat signé.] |
 
 ### 💰 Financement
 
@@ -50,7 +50,7 @@
 | Comment sont diffusées mes annonces ? | Sur notre site, les portails partenaires (SeLoger, Leboncoin, Bien'ici) et nos réseaux sociaux. |
 | Comment suivre l'avancement de ma vente ? | Vous avez accès à votre espace client en ligne. Votre agent vous tient également informé par email et téléphone. |
 | Où se situe votre agence ? | [Adresse de l'agence — à personnaliser]. |
-| Quels sont vos horaires ? | Du lundi au vendredi, 9h-19h. Le samedi, 9h-13h. |
+| Quels sont vos horaires ? | [Horaires de l'agence — à personnaliser]. |
 
 ---
 
@@ -140,7 +140,7 @@ Le chatbot escalade à un humain si :
 ## 6. Initialisation chez un client
 
 1. **Audit des questions fréquentes** — interview de l'équipe support : quelles sont les 20 questions qui reviennent tout le temps ?
-2. **Rédaction des réponses** — avec le client, pour garantir l'exactitude
+2. **Rédaction des réponses** — avec le client, pour garantir l'exactitude ; aucune réponse entre crochets ne doit rester avant mise en production
 3. **Intégration dans la base documentaire** — format structuré (question → réponse → catégorie)
 4. **Test en dry-run** — 50 vraies conversations historiques passées dans le système, vérification des réponses
 5. **Ajustement** — correction des erreurs, enrichissement de la FAQ

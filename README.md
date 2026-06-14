@@ -41,7 +41,7 @@ Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensu
 ## 📬 Contact
 
 - **Email :** donopot@pm.me
-- **Calendly :** [Réserver un appel](https://calendly.com/donopot)
+- **Rendez-vous :** envoyez un email à donopot@pm.me pour convenir d'un créneau
 - **LinkedIn :** [linkedin.com/in/donopot](https://linkedin.com/in/donopot)
 
 ---

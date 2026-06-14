@@ -182,7 +182,8 @@ Une fois par mois, je vous envoie un rapport :
 
 ```
 Voilà. Ce que vous venez de voir, c'est le Pack Réponse Lead.
-Livré en 7 à 12 jours. Avec maintenance mensuelle (supervision, correctifs, optimisations).
+Livré en 7 à 30 jours selon le périmètre. Maintenance mensuelle en option
+(supervision, correctifs, optimisations).
 
 Si vous voulez la même chose pour votre agence,
 on se parle 20 minutes.

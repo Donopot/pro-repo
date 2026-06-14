@@ -20,15 +20,11 @@
         │
         ▼
   ╔══════════════════════════════════════════╗
-  ║       MODULE 2 — Routeur (Router)       ║
-  ║   Aiguillage selon type de demande      ║
+  ║ MODULE 2 — Variables de qualification   ║
+  ║ Catégorie, template et assignation      ║
   ╚══════════════════════════════════════════╝
         │
-   ┌────┼────┐
-   ▼    ▼    ▼
-[Estim] [Visite] [Vente]
-   │     │      │
-   └─────┼──────┘
+         │
          ▼
   ╔══════════════════════════════════════════╗
   ║   MODULE 3 — Pipedrive « Search person »║
@@ -71,24 +67,23 @@
          │
          ▼
   ╔══════════════════════════════════════════╗
-  ║  MODULE 9 — Delay / Sleep               ║
-  ║    Attente 48 heures                    ║
+  ║ MODULE 9 — Pipedrive « Update deal »    ║
+  ║    relance_due_at = maintenant + 48 h   ║
   ╚══════════════════════════════════════════╝
+
+[Scénario séparé, planifié toutes les 15 minutes]
          │
          ▼
-  ╔══════════════════════════════════════════╗
-  ║  MODULE 10 — Pipedrive « Get deal »     ║
-  ║    Vérification si lead a avancé         ║
-  ╚══════════════════════════════════════════╝
+  Chercher les deals « Nouveau lead »
+  dont relance_due_at est dépassée
          │
     ┌────┴────┐
     ▼         ▼
-[Avancé ?]  [Toujours « Nouveau lead »]
+[À relancer] [Déjà avancé]
     │         │
-   STOP   ╔═══════════════════════════════╗
-          ║ MODULE 11 — Brevo            ║
-          ║ « Send email » — Relance     ║
-          ╚═══════════════════════════════╝
+    ▼        STOP
+  Envoyer la relance puis renseigner
+  relance_sent_at et ajouter une note
 ```
 
 ---
@@ -120,16 +115,20 @@
 }
 ```
 
-### Module 2 — Routeur
+### Module 2 — Préparer qualification et template
 
-| Règle | Condition | Action |
-|-------|-----------|--------|
-| Estimation | `type == "estimation"` | → Chemin estimation |
-| Visite | `type == "visite"` | → Chemin visite |
-| Vente | `type == "vente"` | → Chemin vente |
-| Défaut | Aucune condition remplie | → Chemin générique |
+Utiliser un module de définition de variables et la fonction `switch()` afin de
+conserver une chaîne unique après la qualification.
 
-> 💡 Les chemins peuvent converger après le routeur. La seule différence peut être le template d'email ou l'assignation d'agent.
+| Variable | Règle |
+|----------|-------|
+| `lead_category` | Estimation, Visite, Vente ou Autre selon `type` |
+| `email_template` | Template correspondant au type, avec fallback générique |
+| `agent_*` | Valeurs issues de la table d'assignation par code postal |
+
+> 💡 Si un vrai routeur est nécessaire pour des traitements différents, les
+> modules suivants doivent être dupliqués dans chaque route : les routes Make
+> ne convergent pas ensuite vers une chaîne commune.
 
 ### Module 3 — Pipedrive Search person
 
@@ -141,6 +140,11 @@
 | **Exact match** | Oui |
 
 Résultat : `person_id` si trouvé, vide sinon.
+
+> ⚠️ Configurer le module pour poursuivre la route lorsqu'aucun résultat n'est
+> trouvé. Sinon, zéro bundle est émis et la création du contact ne s'exécute pas.
+> Une alternative robuste consiste à utiliser deux routes filtrées :
+> « personne trouvée » et « personne absente ».
 
 ### Module 4 — Pipedrive Create person (conditionnel)
 
@@ -164,7 +168,7 @@ Résultat : `person_id` si trouvé, vide sinon.
 | **Stage** | Nouveau lead |
 | **Value** | `0` (à compléter après estimation) |
 | **Owner** | Assigné selon secteur (`{{1.postal_code}}` → table de correspondance) |
-| **Custom fields** | `surface` = `{{1.surface}}`, `ville` = `{{1.city}}`, `code_postal` = `{{1.postal_code}}`, `urgence` = calculée |
+| **Custom fields** | `surface` = `{{1.surface}}`, `ville` = `{{1.city}}`, `code_postal` = `{{1.postal_code}}`, `urgence` = calculée, `relance_due_at` = `addHours(now; 48)`, `relance_sent_at` = vide |
 
 **Table d'assignation (exemple Paris) :**
 
@@ -218,25 +222,27 @@ Agence Duport
 | **Deal** | `{{5.deal_id}}` |
 | **Content** | `📨 Email de réponse envoyé le {{formatDate now "DD/MM/YYYY à HH:mm"}} — template estimation` |
 
-### Module 9 — Delay
+### Module 9 — Programmer la relance
 
-| Propriété | Valeur |
-|-----------|--------|
-| **Type** | Tools → Sleep |
-| **Delay** | 48 hours (`48 * 3600` secondes) |
+Mettre à jour le deal créé avec :
 
-### Module 10 — Pipedrive Get deal
+| Champ | Valeur |
+|-------|--------|
+| `relance_due_at` | `addHours(now; 48)` |
+| `relance_sent_at` | Vide |
 
-| Propriété | Valeur |
-|-----------|--------|
-| **Type** | Pipedrive → Get deal details |
-| **Deal ID** | `{{5.deal_id}}` |
+### Scénario séparé — Envoyer les relances
 
-### Module 11 — Brevo Relance (conditionnel)
+Créer un second scénario Make, planifié toutes les 15 minutes :
 
-| Condition | Valeur |
-|-----------|--------|
-| **Déclencheur** | `{{10.stage_id}}` == stage « Nouveau lead » |
+1. Rechercher les deals à l'étape « Nouveau lead ».
+2. Garder uniquement ceux dont `relance_due_at <= now` et
+   `relance_sent_at` est vide.
+3. Envoyer la relance Brevo.
+4. Renseigner `relance_sent_at` et ajouter une note dans le deal.
+
+Cette architecture évite de conserver une exécution ouverte pendant 48 heures
+et rend les relances observables et relançables en cas d'erreur.
 
 ```text
 Objet : Suite à votre demande d'estimation
@@ -284,11 +290,12 @@ Bien à vous,
 | Make | n8n |
 |------|-----|
 | Webhook | Webhook node |
-| Router | Switch node |
+| Variables avec `switch()` | Edit Fields / Code node |
 | Pipedrive modules | Pipedrive nodes |
 | Text parser | Function node (JavaScript) |
-| Sleep | Wait node |
+| Scénario de relance planifié | Schedule Trigger + recherche Pipedrive |
 | Brevo | HTTP Request node (Brevo API) |
 
 > Le blueprint JSON Make est disponible dans `demos/workflow-reponse-lead.json`.
-> Pour n8n, importer le blueprint via le convertisseur n8n → Make ou recréer manuellement.
+> Pour n8n, recréer le workflow avec les nœuds équivalents. Les imports n8n
+> attendent un export JSON n8n ; le blueprint conceptuel Make n'est pas importable.

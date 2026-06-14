@@ -23,13 +23,12 @@
     },
     {
       "id": 2,
-      "type": "router",
-      "label": "Aiguillage type de demande",
-      "branches": [
-        { "condition": "type == estimation", "label": "Estimation" },
-        { "condition": "type == visite", "label": "Visite" },
-        { "condition": "type == vente", "label": "Vente" }
-      ]
+      "type": "set_variables",
+      "label": "Préparer qualification et template",
+      "variables": {
+        "lead_category": "{{switch(1.type; \"estimation\"; \"Estimation\"; \"visite\"; \"Visite\"; \"vente\"; \"Vente\"; \"Autre\")}}",
+        "email_template": "{{switch(1.type; \"estimation\"; \"email_estimation.html\"; \"visite\"; \"email_visite.html\"; \"email_generique.html\")}}"
+      }
     },
     {
       "id": 3,
@@ -37,7 +36,8 @@
       "label": "Recherche doublon CRM",
       "field": "email",
       "term": "{{1.email}}",
-      "exact_match": true
+      "exact_match": true,
+      "continue_if_no_results": true
     },
     {
       "id": 4,
@@ -65,14 +65,16 @@
       "custom_fields": {
         "surface": "{{1.surface}}",
         "ville": "{{1.city}}",
-        "code_postal": "{{1.postal_code}}"
+        "code_postal": "{{1.postal_code}}",
+        "relance_due_at": "{{addHours(now; 48)}}",
+        "relance_sent_at": null
       }
     },
     {
       "id": 6,
       "type": "text_parser",
       "label": "Composer email personnalisé",
-      "template": "email_reponse_lead.html",
+      "template": "{{2.email_template}}",
       "variables": ["name", "type", "property_type", "city", "agent_name", "agent_slug"]
     },
     {
@@ -90,29 +92,21 @@
       "label": "Noter envoi dans CRM",
       "deal_id": "{{5.id}}",
       "content": "📨 Réponse automatique envoyée — {{formatDate now \"DD/MM/YYYY HH:mm\"}}"
-    },
-    {
-      "id": 9,
-      "type": "sleep",
-      "label": "Attente 48h",
-      "delay_seconds": 172800
-    },
-    {
-      "id": 10,
-      "type": "pipedrive_get_deal",
-      "label": "Vérifier statut lead",
-      "deal_id": "{{5.id}}"
-    },
-    {
-      "id": 11,
-      "type": "brevo_send_email",
-      "label": "Relance si pas de réponse",
-      "condition": "{{10.stage}} == \"Nouveau lead\"",
-      "to": "{{1.email}}",
-      "subject": "Suite à votre demande — {{1.type}} {{1.city}}",
-      "template": "email_relance_lead.html"
     }
   ],
+  "follow_up_scenario": {
+    "schedule": "every 15 minutes",
+    "query": "Deals in stage Nouveau lead with relance_due_at <= now and relance_sent_at empty",
+    "actions": [
+      "Send email_relance_lead.html through Brevo",
+      "Set relance_sent_at to now",
+      "Add a note to the deal"
+    ],
+    "required_deal_fields": {
+      "relance_due_at": "Set to addHours(now; 48) when the deal is created",
+      "relance_sent_at": "Left empty until the follow-up email is sent"
+    }
+  },
   "error_handling": {
     "on_api_failure": "retry 3 times, interval 5 min, then alert",
     "on_invalid_payload": "return 400 with error message",

@@ -50,20 +50,20 @@
 
 **Fichier :** `demos/workflow-reponse-lead.json` + `demos/workflow-reponse-lead.md`
 
-**Objectif :** Export JSON d'un blueprint Make utilisable comme base pour tous les projets réponse lead.
+**Objectif :** Spécification JSON conceptuelle utilisable comme base pour reproduire le workflow dans Make.
 
 **Modules :**
 
 1. **Webhook** — Réception du lead (JSON depuis formulaire)
-2. **Router** — Aiguillage selon type (estimation, visite, vente)
+2. **Variables de qualification** — Catégorie, template et assignation selon le type
 3. **Pipedrive → Search persons** — Détection doublon par email
 4. **Pipedrive → Create/Update person** — Création ou mise à jour
 5. **Pipedrive → Create deal** — Création deal avec étape et valeur
 6. **Text parser** — Composition email (template avec variables)
 7. **Brevo → Send email** — Envoi réponse personnalisée
-8. **Sleep / Delay** — Attente 48h
-9. **Pipedrive → Check deal stage** — Vérification si le lead a répondu
-10. **Brevo → Send email (relance)** — Relance si pas de réponse
+8. **Pipedrive → Update deal** — Programmation de la date de relance
+9. **Scénario planifié séparé** — Recherche périodique des deals à relancer
+10. **Brevo → Send email (relance)** — Relance puis marquage du deal
 
 **Documentation :** `demos/workflow-reponse-lead.md` explique chaque module, les variables, et comment adapter.
 
