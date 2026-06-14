@@ -25,10 +25,18 @@ pro-repo/
 │   ├── audit.md        ← Trame d'audit
 │   ├── contrat.md      ← Contrat de prestation
 │   ├── annexe-rgpd.md  ← Annexe article 28 RGPD
-│   ├── sla.md           ← Annexe maintenance et SLA
-│   └── outreach.md      ← Scripts commerciaux
-├── scripts/             ← Validations locales et CI
-└── .github/workflows/   ← Validation et déploiement GitHub Pages
+│   ├── registre-rgpd.md ← Registre traitements (modèle article 30 CNIL)
+│   ├── sla.md          ← Annexe maintenance et SLA
+│   ├── outreach.md     ← Scripts commerciaux
+│   ├── onboarding-checklist.md ← Checklist onboarding 7 phases
+│   └── onboarding-email.md     ← Emails de bienvenue et relance
+├── crm/                ← Prospection et suivi commercial
+│   ├── agences-cibles.csv  ← 100 agences immobilières cibles
+│   ├── crm-modele.csv      ← Template CRM importable
+│   └── setup-crm.md        ← Guide configuration (Sheets/Airtable/Notion)
+├── demos/              ← Démonstrations et guides techniques
+├── scripts/            ← Validations locales et CI
+└── .github/workflows/  ← Validation et déploiement GitHub Pages
 ```
 
 ---

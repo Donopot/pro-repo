@@ -133,7 +133,8 @@ Le Prestataire tient un registre des activités de traitement pour son activité
 propre (prospection, gestion commerciale, facturation) et pour chaque client.
 
 Le Client est responsable de son propre registre. Le Prestataire fournit les
-informations nécessaires pour le compléter.
+informations nécessaires pour le compléter, sous la forme du modèle
+`templates/registre-rgpd.md` (conforme à l'article 30 RGPD).
 
 ---
 
