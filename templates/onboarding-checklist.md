@@ -23,14 +23,15 @@
 
 | # | Action | Qui | Détail | Délai | ✅ |
 |---|--------|:---:|--------|-------|:---:|
-| 1.1 | Créer un document partagé « Accès & ressources » | D | Google Doc ou Notion listant tous les accès nécessaires | J+1 | ☐ |
-| 1.2 | Fournir accès CRM (admin ou rôle personnalisé) | C | Pipedrive ou HubSpot | J+3 | ☐ |
-| 1.3 | Fournir accès emailing (API key ou accès compte) | C | Brevo ou autre | J+3 | ☐ |
-| 1.4 | Fournir accès formulaire web / site | C | Admin WordPress, Webflow ou FTP | J+3 | ☐ |
+| 1.1 | Créer un document partagé « Accès & ressources » | D | Lister les accès requis, leurs propriétaires et leur durée, sans aucun mot de passe ni secret | J+1 | ☐ |
+| 1.2 | Inviter un compte nominatif CRM au moindre privilège | C | Pipedrive ou HubSpot, MFA activée, accès limité au projet | J+3 | ☐ |
+| 1.3 | Créer une clé API dédiée à portée minimale | C | Transmission par coffre chiffré ou lien à usage unique, jamais par email/document | J+3 | ☐ |
+| 1.4 | Inviter un compte nominatif pour le site/formulaire | C | Rôle limité ; éviter les comptes partagés et FTP quand une invitation est possible | J+3 | ☐ |
 | 1.5 | Fournir liste des agents commerciaux (nom, email, secteur) | C | CSV ou tableau | J+5 | ☐ |
 | 1.6 | Fournir templates email existants (signature, charte) | C | Fichiers ou captures | J+5 | ☐ |
 | 1.7 | Fournir règles métier (affectation, qualification, seuils) | C | Document écrit ou appel | J+5 | ☐ |
 | 1.8 | Vérifier tous les accès fonctionnels | D | Test de connexion | J+5 | ☐ |
+| 1.9 | Documenter propriétaire, portée, expiration et révocation | D+C | Registre des accès sans secrets | J+5 | ☐ |
 
 ---
 
@@ -86,8 +87,9 @@
 | 5.1 | Session de recette avec le client (1h) | D+C | Scénarios validés | ☐ |
 | 5.2 | Corrections post-recette | D | Sous 48h | ☐ |
 | 5.3 | Validation finale | C | Email « Bon pour go-live » | ☐ |
-| 5.4 | Activation en production | D | Workflows live | ☐ |
-| 5.5 | Session de prise en main (1h) | D+C | Équipe formée | ☐ |
+| 5.4 | Envoyer facture de solde (70 %) | D | Facture à la recette, conformément au devis | ☐ |
+| 5.5 | Activation en production | D | Workflows live | ☐ |
+| 5.6 | Session de prise en main (1h) | D+C | Équipe formée | ☐ |
 
 ---
 
@@ -98,7 +100,7 @@
 | 6.1 | Surveillance quotidienne des workflows | D | 7 jours | ☐ |
 | 6.2 | Corrections mineures (incluses) | D | Sous 24h | ☐ |
 | 6.3 | Point de fin d'hypercare | D+C | J+7 post go-live | ☐ |
-| 6.4 | Envoyer facture de solde (70 %) | D | J+7 post go-live | ☐ |
+| 6.4 | Vérifier le règlement de la facture de solde envoyée à la recette (70 %) | D | À la recette, conformément au devis | ☐ |
 | 6.5 | Activer la maintenance (si option retenue) | D | J+7 post go-live | ☐ |
 
 ---
@@ -128,3 +130,10 @@
 ---
 
 *Checklist à dupliquer pour chaque nouveau client. Adapter les délais selon le pack retenu.*
+
+## Règles de sécurité des accès
+
+- Utiliser des comptes nominatifs, le moindre privilège et la MFA partout où elle est disponible.
+- Ne jamais transmettre un mot de passe, une clé API ou un token dans un email, un document partagé ou un ticket.
+- Transmettre les secrets via un coffre chiffré ou un lien à usage unique, puis supprimer le lien après réception.
+- Faire expirer, révoquer ou réduire les accès dès la fin du build et au plus tard à la clôture de l'hypercare.

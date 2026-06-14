@@ -20,7 +20,7 @@
 | **SIRET** | [À compléter] |
 | **Adresse** | [À compléter] |
 | **Représentant légal** | [Nom, qualité] |
-| **DPO / Référent RGPD** | [Nom, email] — obligatoire si + de 20 salariés, recommandé sinon |
+| **DPO / Référent RGPD** | [Nom/email ou « Non désigné »] — évaluer la désignation selon les critères de l'article 37 RGPD, indépendamment d'un seuil d'effectif |
 
 ---
 
@@ -68,17 +68,17 @@ Qualifier, affecter et répondre automatiquement aux demandes entrantes
 |--------|-------|------|
 | Données des leads | 3 ans après le dernier contact | Suppression |
 | Données des clients | 5 ans après la fin de la relation commerciale | Suppression |
-| Logs techniques (Make) | 30 jours (rétention Make par défaut) | Suppression automatique |
+| Logs techniques d'automatisation | [Durée configurée et vérifiée dans le contrat/compte] | Suppression ou anonymisation selon la configuration |
 
 ### Mesures de sécurité
 
 | Mesure | Détail |
 |--------|--------|
 | **Authentification** | MFA sur tous les outils (Make, Pipedrive, Brevo) |
-| **Chiffrement** | HTTPS (transit), AES-256 (stockage Pipedrive/Brevo) |
+| **Chiffrement** | Vérifier et documenter les mécanismes réellement applicables dans les contrats et configurations retenus |
 | **Gestion des secrets** | API tokens stockés dans le gestionnaire de variables Make, pas en clair dans le code |
 | **Journalisation** | Logs d'exécution Make, logs d'accès Pipedrive |
-| **Sauvegarde** | Sauvegardes quotidiennes Pipedrive (rétention 30 jours) |
+| **Sauvegarde** | Définir fréquence, périmètre, rétention et test de restauration selon l'offre réellement souscrite |
 | **Procédure d'incident** | Notification Client sous 24h, notification CNIL sous 72h si nécessaire |
 
 ---
@@ -145,17 +145,14 @@ avec transmission à un humain si nécessaire.
 
 ## 5. Sous-traitants ultérieurs — Détail
 
-Conformément à l'article 28.2, le Client autorise le recours aux sous-traitants
-ultérieurs suivants, qui présentent des garanties suffisantes en matière de sécurité :
+Conformément à l'article 28.2, le Client documente et autorise uniquement les
+sous-traitants réellement utilisés après vérification de leur DPA et de la
+configuration souscrite. Ne pas déduire la localisation, les certifications ou
+les garanties de transfert du seul nom du fournisseur.
 
-| Sous-traitant | Localisation données | Certifications | Lien DPA |
-|--------------|---------------------|----------------|----------|
-| **Make** (Celonis) | UE (Allemagne) | ISO 27001, SOC 2 | [make.com/en/legal/data-processing-agreement](https://www.make.com/en/legal/data-processing-agreement) |
-| **Pipedrive** | UE (Estonie) | ISO 27001, SOC 2 | [pipedrive.com/en/privacy](https://www.pipedrive.com/en/privacy) |
-| **Brevo** (ex-Sendinblue) | UE (France) | ISO 27001 | [brevo.com/fr/legal/privacypolicy](https://www.brevo.com/fr/legal/privacypolicy/) |
-| **Mistral AI** | UE (France) | En cours | [mistral.ai/terms](https://mistral.ai/terms/) |
-| **OpenAI** (si utilisé) | États-Unis (DPF) | SOC 2, Data Privacy Framework | [openai.com/policies/data-processing-addendum](https://openai.com/policies/data-processing-addendum) |
-| **HubSpot** (si utilisé) | États-Unis (DPF) | ISO 27001, SOC 2 | [hubspot.com/data-privacy](https://www.hubspot.com/data-privacy) |
+| Sous-traitant / service | Région et configuration retenues | Transfert hors UE | Mécanisme applicable | Preuve et date de vérification |
+|-------------------------|----------------------------------|-------------------|----------------------|-------------------------------|
+| [À compléter] | [À compléter] | [Oui / Non / À vérifier] | [Adéquation, CCT, autre] | [DPA/contrat/configuration + date] |
 
 > Pour tout nouveau sous-traitant ultérieur, Donopot informe le Client par écrit
 > avec un préavis de 15 jours. Le Client peut s'y opposer par écrit motivé.
@@ -164,16 +161,11 @@ ultérieurs suivants, qui présentent des garanties suffisantes en matière de s
 
 ## 6. Transferts hors Union Européenne
 
-Les données sont hébergées et traitées prioritairement dans l'UE.
-
-| Outil | Transfert hors UE ? | Mécanisme de conformité |
-|-------|:---:|------------------------|
-| Make | Non | Données hébergées en Allemagne |
-| Pipedrive | Non | Données hébergées en Estonie |
-| Brevo | Non | Données hébergées en France |
-| Mistral AI | Non | Données hébergées en France |
-| OpenAI | **Oui** (si utilisé) | Data Privacy Framework (DPF) — décision d'adéquation 2023 |
-| HubSpot | **Oui** (si utilisé) | Data Privacy Framework (DPF) + Clauses contractuelles types |
+Pour chaque outil réellement utilisé, vérifier les flux, la région configurée,
+les accès de support, les sous-traitants ultérieurs et le DPA à la date du
+déploiement. Documenter le mécanisme applicable à chaque transfert et, si
+nécessaire, l'analyse de risque et les mesures supplémentaires. Faire valider
+les conclusions par le responsable de traitement ou son conseil.
 
 ---
 
@@ -192,19 +184,23 @@ Donopot, en tant que sous-traitant, s'engage à :
 
 ## 8. Analyse d'impact (AIPD)
 
-Une AIPD est-elle obligatoire ?
+La nécessité d'une AIPD doit être évaluée pour chaque traitement réel, avant
+mise en production et à chaque évolution importante. Documenter notamment :
 
-| Critère | Traitement n° 1 (Lead) | n° 2 (CRM) | n° 3 (Support) |
-|---------|:---:|:---:|:---:|
-| Profilage ou évaluation systématique | Non | Non | Non |
-| Décision automatisée produisant des effets juridiques | Non | Non | Non |
-| Surveillance systématique à grande échelle | Non | Non | Non |
-| Données sensibles (art. 9) | Non | Non | Non |
-| Données à grande échelle | Non (PME) | Non (PME) | Non (PME) |
-| **AIPD obligatoire ?** | **Non** | **Non** | **Non** |
+- l'évaluation ou le scoring, y compris le profilage ;
+- les décisions automatisées ayant un effet juridique ou significatif ;
+- la surveillance systématique ;
+- les données sensibles ou hautement personnelles ;
+- le traitement à grande échelle ;
+- le croisement ou la combinaison de jeux de données ;
+- les personnes vulnérables ;
+- l'usage innovant ou de nouvelles technologies ;
+- l'exclusion d'un droit, d'un service ou d'un contrat.
 
-> Si votre agence traite plus de 10 000 leads/an ou utilise un scoring automatisé
-> (ex : notation des leads), une AIPD devient obligatoire. Contactez votre DPO.
+Si le traitement est susceptible d'engendrer un risque élevé, figure sur une
+liste imposant une AIPD, ou cumule plusieurs critères pertinents, réaliser
+l'AIPD. La décision et sa justification doivent être validées par le responsable
+de traitement et, lorsqu'il existe, par le DPO ou le conseil juridique.
 
 ---
 

@@ -6,7 +6,7 @@
 
 ---
 
-## Sprint 1 — Liste 100 agences cibles
+## Sprint 1 — Modèle de liste d'agences cibles vérifiées
 
 **Fichier :** `crm/agences-cibles.csv`
 
@@ -15,7 +15,8 @@ Format structuré importable dans un CRM :
 - Taille (estimation nombre d'agents)
 - Type (indépendante / réseau / digitale)
 - Site web, email générique, téléphone
-- Source (PagesJaunes, Google Maps, réseaux)
+- URL exacte de la source publique, date de collecte et date de vérification
+- Statut de vérification et indicateur d'opposition
 - Statut prospection (à contacter / contactée / relancée)
 - Notes
 
@@ -26,7 +27,7 @@ Format structuré importable dans un CRM :
 - Mix : Paris/Lyon/Marseille/Bordeaux/Nantes/Lille/Toulouse + villes moyennes
 - Indépendantes ET franchises (les franchises ont plus de budget)
 
-**Vérification :** Fichier CSV valide avec exactement 100 lignes, importable dans Sheets/Airtable.
+**Vérification :** Fichier CSV importable dans Sheets/Airtable. Aucune ligne ne peut être utilisée pour une sollicitation sans vérification manuelle, source exacte, dates de collecte/vérification et contrôle de la liste d'opposition. Les données synthétiques ou non vérifiées sont interdites.
 
 ---
 
@@ -37,7 +38,7 @@ Format structuré importable dans un CRM :
 - `crm/setup-crm.md` — guide de configuration
 
 **Schéma CRM :**
-- Colonnes : ID, Nom agence, Ville, Contact principal, Email, Téléphone, Statut pipeline (À contacter → Contactée → Relancée → Démo → Devis → Gagné/Perdu), Date dernier contact, Prochaine action, Assigné à, Notes, Tags
+- Colonnes : ID, Nom agence, Ville, Contact principal, Email, Téléphone, Statut pipeline (À qualifier → À contacter → Contactée → Relancée → Démo → Devis → Gagné/Perdu/Opposition), Date dernier contact, Prochaine action, Assigné à, Notes, Tags, source, information et opposition
 
 **Guide setup :** Instructions pour importer dans Airtable (gratuit), Google Sheets (gratuit) ou Notion (gratuit). Avec vues filtrées recommandées.
 

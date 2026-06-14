@@ -24,10 +24,11 @@
    - « Devis envoyé » → fond jaune clair
    - « Gagné » → fond vert clair
    - « Perdu » → fond rouge clair
+   - « Opposition » → fond noir, texte blanc
 3. **Validation des données** sur la colonne `statut_pipeline` :
    - Données → Validation des données
    - Critères : Liste d'éléments
-   - Valeurs : `À contacter, Contactée, Relancée, Démo programmée, Devis envoyé, Négociation, Gagné, Perdu`
+   - Valeurs : `À qualifier, À contacter, Contactée, Relancée, Démo programmée, Devis envoyé, Négociation, Gagné, Perdu, Opposition`
 
 ### Étape 3 — Vues filtrées
 
@@ -36,15 +37,24 @@ Créer 3 vues filtrées (Données → Vues filtrées) :
 | Vue | Filtre | Usage |
 |-----|--------|-------|
 | **À faire cette semaine** | `prochaine_action_date` = cette semaine | Planification hebdo |
-| **Pipeline actif** | `statut_pipeline` ≠ Gagné, Perdu | Suivi commercial |
-| **Relances urgentes** | `statut_pipeline` = Contactée, Relancée ET `date_dernier_contact` > 7 jours | Ne pas perdre le fil |
+| **Pipeline actif** | `statut_pipeline` ≠ Gagné, Perdu, Opposition ET `ne_plus_contacter` ≠ Oui | Suivi commercial |
+| **Relances urgentes** | `statut_pipeline` = Contactée ou Relancée ET `date_dernier_contact` ≤ `AUJOURDHUI()-7` ET `ne_plus_contacter` ≠ Oui | Ne pas perdre le fil |
+| **Liste d'opposition** | `ne_plus_contacter` = Oui | Exclure de toute sollicitation |
 
 ### Étape 4 — Import du fichier agences-cibles.csv
 
 1. En bas de la feuille, cliquer sur **+** pour ajouter une feuille
 2. La renommer « Cibles »
 3. Fichier → Importer → `agences-cibles.csv`
-4. Sur la feuille « Pipeline », copier les colonnes `nom`, `ville`, `email`, `téléphone` depuis « Cibles » quand un lead entre dans le pipeline
+4. Ne copier une cible dans « Pipeline » que si `verification_status` vaut `verifie`, que `source_url`, `date_collecte` et `date_verification` sont renseignées, et que `opposition` ne vaut pas `Oui`
+
+### Règles obligatoires avant toute prospection
+
+- Vérifier manuellement l'identité, le domaine, les coordonnées professionnelles et la pertinence du message.
+- Conserver l'URL exacte de la source publique et les dates de collecte et de vérification.
+- Ne jamais contacter une ligne d'exemple, non vérifiée, ou marquée `opposition` / `ne_plus_contacter`.
+- Identifier clairement l'expéditeur et proposer dans chaque sollicitation un moyen simple et gratuit de s'opposer.
+- En cas d'opposition, renseigner immédiatement `opposition_date`, `ne_plus_contacter=Oui`, le motif, puis conserver uniquement les informations minimales nécessaires à la liste d'opposition.
 
 ---
 
@@ -91,6 +101,7 @@ Créer 3 vues filtrées (Données → Vues filtrées) :
 | **Négociation** | Discussion active sur le devis | Ajustements, réponses aux objections |
 | **Gagné** | Devis signé, acompte reçu | Déclencher l'onboarding |
 | **Perdu** | Opportunité fermée sans suite | Noter la raison, archiver après 30 jours |
+| **Opposition** | Le destinataire refuse toute prospection | Exclure immédiatement de toutes les campagnes |
 
 ---
 
@@ -107,7 +118,10 @@ Créer 3 vues filtrées (Données → Vues filtrées) :
 
 ## Indicateurs à suivre
 
-- **Taux de réponse** = Contactées / À contacter (cible > 30 %)
-- **Taux de démo** = Démo programmée / Contactées (cible > 40 %)
-- **Taux de conversion** = Gagné / Contactées (cible > 15 %)
+Calculer les taux sur une cohorte et une période identiques, à partir d'événements datés, pas à partir du stock actuel de chaque statut :
+
+- **Taux de réponse** = nombre de prospects ayant répondu / nombre de prospects contactés
+- **Taux de démo** = nombre de démos programmées / nombre de prospects contactés
+- **Taux de conversion** = nombre d'opportunités gagnées / nombre de prospects contactés
+- **Taux d'opposition** = nombre d'oppositions / nombre de prospects contactés
 - **Cycle de vente moyen** = délai entre premier contact et Gagné (cible < 30 jours)

@@ -30,7 +30,7 @@ Maintenance mensuelle : [Retenue — X €/mois / Non retenue]
 Voici ce qui va se passer dans les jours à venir :
 
 1. Je vous envoie un document « Accès & ressources »
-   → Vous y renseignerez les accès à vos outils (CRM, emailing, site)
+   → Il liste les accès requis, leurs propriétaires et leur durée, sans contenir de mot de passe ni de secret
 
 2. Vous me transmettez la liste de vos agents et vos règles métier
    → Un tableau simple à remplir, je vous guide
@@ -42,14 +42,14 @@ Voici ce qui va se passer dans les jours à venir :
 ─────────────────────
 Voici ce dont j'aurai besoin de votre côté :
 
-☐ Accès administrateur ou rôle personnalisé à votre CRM
-   (Pipedrive / HubSpot — a minima : création de contacts, deals, activités)
+☐ Invitation d'un compte nominatif au rôle minimal nécessaire dans votre CRM
+   (Pipedrive / HubSpot — MFA activée, accès limité au périmètre du projet)
 
-☐ Clé API ou accès à votre outil d'emailing
-   (Brevo, Mailchimp, SendGrid…)
+☐ Clé API dédiée à portée minimale pour votre outil d'emailing
+   (Brevo, Mailchimp, SendGrid…) transmise par coffre chiffré ou lien à usage unique
 
-☐ Accès au back-office de votre site ou formulaire de contact
-   (URL admin + identifiants, ou accès FTP)
+☐ Invitation d'un compte nominatif au back-office de votre site ou formulaire
+   (rôle limité ; pas d'identifiants envoyés par email)
 
 ☐ Liste des agents commerciaux (nom, email, téléphone, secteur géographique)
 
@@ -61,6 +61,9 @@ Voici ce dont j'aurai besoin de votre côté :
 ──────────────────
 Je reste disponible par email ou on peut s'appeler 10 minutes si c'est plus simple.
 Le plus tôt j'ai les accès, le plus tôt on livre.
+
+Pour votre sécurité, ne répondez pas à cet email avec un mot de passe, une clé API
+ou un token. Je vous transmettrai le canal chiffré prévu pour les secrets.
 
 À très bientôt,
 
