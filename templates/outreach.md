@@ -28,6 +28,10 @@ Bien à vous,
 {{Nom}}
 Donopot — Automatisation IA pour PME
 donopot@pm.me
+
+---
+Si vous ne souhaitez plus recevoir de messages de ma part, répondez simplement
+« STOP » à cet email et je ne vous recontacte pas.
 ```
 
 ---
@@ -50,6 +54,12 @@ un exemple concret.
 
 Bonne journée,
 {{Nom}}
+Donopot — Automatisation IA pour PME
+donopot@pm.me
+
+---
+Si vous ne souhaitez plus recevoir de messages de ma part, répondez simplement
+« STOP » à cet email et je ne vous recontacte pas.
 ```
 
 ---

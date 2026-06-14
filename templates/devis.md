@@ -1,84 +1,80 @@
 # Devis — Modèle
 
 > **Prestataire :** Donopot — EI Micro-entreprise
-> **Client :** [Nom / Raison sociale]
-> **Date :** [JJ/MM/AAAA]
-> **Réf. devis :** DEV-[ANNEE]-[NUM]
-> **Validité :** 30 jours
+> SIRET : [À compléter]
+> Adresse : [À compléter]
+> Email : donopot@pm.me
+>
+> **Client :** [Raison sociale]
+> Adresse : [À compléter]
+> SIRET : [À compléter]
+> Contact : [Nom, email, téléphone]
+>
+> **Devis n° :** DEV-[ANNEE]-[NUM]
+> **Date d'émission :** [JJ/MM/AAAA]
+> **Valable jusqu'au :** [JJ/MM/AAAA]
 
 ---
 
-## Désignation
+## Prestation retenue
 
-| Offre | Description |
-|-------|-------------|
-| [Pack choisi] | Automatisation [Réponse Lead / Workflows CRM / Support Client IA] selon périmètre joint en annexe. |
+| Offre | Détail |
+|-------|--------|
+| [Pack Réponse Lead / Pack Workflows CRM / Pack Support Client IA] | Automatisation selon périmètre détaillé en Annexe 1 — Document de Périmètre |
 
 ---
 
-## Tarifs
-
-### Option 1 — Pack Réponse Lead
+## Montant
 
 | Poste | Prix HT |
 |-------|--------:|
-| Build (7 à 12 jours) | 2 500 – 4 500 € |
-| Maintenance mensuelle | 250 – 600 € / mois |
-| **Total build** | À définir selon complexité |
-
-### Option 2 — Pack Workflows CRM
-
-| Poste | Prix HT |
-|-------|--------:|
-| Build (10 à 20 jours) | 3 500 – 6 500 € |
-| Maintenance mensuelle | 400 – 900 € / mois |
-| **Total build** | À définir selon complexité |
-
-### Option 3 — Pack Support Client IA
-
-| Poste | Prix HT |
-|-------|--------:|
-| Build (15 à 30 jours) | 4 500 – 8 500 € |
-| Maintenance mensuelle | 700 – 1 500 € / mois |
-| **Total build** | À définir selon complexité |
+| Build (livraison sous [X] jours ouvrés) | [X] € |
+| Maintenance mensuelle (engagement 3 mois min.) | [X] € / mois |
+| **Total build HT** | **[X] €** |
 
 ---
 
 ## Conditions de paiement
 
-- **Acompte :** 30 % à la signature
-- **Solde :** 70 % à la recette (livraison validée)
-- **Maintenance :** prélèvement mensuel, engagement initial de 3 mois minimum après go-live
-
----
-
-## Annexes
-
-Le présent devis est indissociable des documents suivants :
-
-1. **Document de périmètre** (scope détaillé)
-2. **Conditions de maintenance et SLA**
-3. **Annexe RGPD** (article 28)
+- **Acompte :** 30 % à la signature, soit [X] €
+- **Solde :** 70 % à la recette, soit [X] €
+- **Maintenance :** prélèvement mensuel à compter du mois suivant la recette
 
 ---
 
 ## Modalités
 
-- **TVA :** Non applicable — article 293 B du CGI (franchise en base)
-- **Durée de validité :** 30 jours à compter de la date d'émission
-- **Règlement :** Par virement bancaire à 30 jours date de facture
-- **Pénalités de retard :** 3 fois le taux d'intérêt légal (article L441-10 du Code de commerce)
-- **Indemnité forfaitaire de recouvrement :** 40 € (article D441-5 du Code de commerce)
+| Élément | Détail |
+|---------|--------|
+| TVA | Non applicable — article 293 B du CGI (franchise en base) |
+| Règlement | Virement bancaire à 30 jours date de facture |
+| Pénalités de retard | 3 fois le taux d'intérêt légal (art. L441-10 Code de commerce) |
+| Indemnité forfaitaire | 40 € (art. D441-5 Code de commerce) |
+| Révision maintenance | Annuelle, sur la base de l'indice Syntec |
 
 ---
 
-## Révision tarifaire
+## Annexes obligatoires
 
-Les tarifs de maintenance sont révisables annuellement à la date anniversaire du contrat,
-sur la base de l'indice Syntec.
+Le présent devis est indissociable des documents suivants, remis avec le contrat :
+
+| Annexe | Document |
+|--------|----------|
+| Annexe 1 | Document de Périmètre (scope détaillé + scénarios de recette) |
+| Annexe 2 | Conditions de maintenance et SLA |
+| Annexe 3 | Annexe RGPD — Article 28 |
 
 ---
 
-**Bon pour accord**
-Date : ____/____/________
-Signature :
+## Signature
+
+**Bon pour accord** (devis + contrat + annexes)
+
+| Le Prestataire | Le Client |
+|----------------|-----------|
+| Date : __/__/____ | Date : __/__/____ |
+| Signature : | Signature + cachet : |
+
+---
+
+*Ce devis est un modèle. Avant envoi au client, remplacer tous les champs [Entre crochets] par les valeurs définitives et supprimer les packs non retenus.*

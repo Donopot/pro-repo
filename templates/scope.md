@@ -55,8 +55,8 @@ Le client s'engage à fournir dans un délai de [X] jours ouvrés après signatu
 
 ## 5. Recette
 
-Le projet est considéré comme livré lorsque les scénarios de test listés en annexe
-fonctionnent sur les cas validés par les deux parties.
+Le projet est considéré comme livré lorsque les scénarios de test suivants
+(à compléter et valider avant le build) fonctionnent sur les cas réels :
 
 Scénarios types :
 1. Un lead soumet le formulaire → réponse automatique sous 3 min → fiche CRM créée

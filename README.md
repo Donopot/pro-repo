@@ -12,7 +12,7 @@
 | 🔄 **Pack Workflows CRM** | Fiches, dédoublonnage, pipeline, SLA | 3 500 – 6 500 € |
 | 💬 **Pack Support Client IA** | Triage, FAQ, handoff, reporting | 4 500 – 8 500 € |
 
-Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensuelle.
+Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensuelle en option.
 
 ---
 
@@ -27,7 +27,7 @@ Chaque projet inclut : cadrage RGPD · recette · hypercare · maintenance mensu
 ## 🔧 Comment je travaille
 
 1. **Audit cadré** — on cartographie vos flux et vos outils (1h)
-2. **Build** — automatisation livrée, testée, documentée (7 à 20 jours)
+2. **Build** — automatisation livrée, testée, documentée (7 à 30 jours selon le pack)
 3. **Maintenance** — supervision, correctifs, optimisations continues
 
 ---

@@ -2,6 +2,9 @@
 
 > **Annexe au contrat de prestation entre Donopot (sous-traitant) et [Client] (responsable de traitement).**
 > **Date :** [JJ/MM/AAAA]
+>
+> La présente annexe est établie conformément à l'article 28 du Règlement Général
+> sur la Protection des Données (UE) 2016/679.
 
 ---
 
@@ -17,29 +20,64 @@
 
 ---
 
-## 2. Sous-traitants ultérieurs
+## 2. Traitement sur instruction documentée
 
-Le Client autorise le recours aux sous-traitants ultérieurs suivants,
-sous réserve qu'ils présentent des garanties suffisantes :
+Le Prestataire s'engage à ne traiter les données à caractère personnel que sur
+**instruction documentée du Client**, y compris en ce qui concerne les transferts
+de données vers un pays tiers.
 
-| Sous-traitant | Rôle | Localisation des données | Garanties |
-|---------------|------|--------------------------|-----------|
-| **Make** (Celonis) | Plateforme d'automatisation | UE / États-Unis (AWS) | DPA signé, CCT disponibles |
-| **n8n** (n8n GmbH) | Automatisation self-host ou cloud | UE (Francfort) si cloud | DPA disponible |
-| **Pipedrive** | CRM | États-Unis (AWS) | DPA, CCT |
-| **HubSpot** | CRM | États-Unis | DPA, CCT |
-| **Brevo** (Sendinblue) | Emailing / automation | France / UE | DPA, hébergement UE |
-| **Mistral AI** | LLM pour classification / rédaction | UE | API, pas de stockage des données |
-| **OpenAI** | LLM pour classification / rédaction | États-Unis | DPA, CCT, opt-out entraînement |
-| **Scaleway** / **OVHcloud** | Hébergement (si self-host) | France / UE | Certifications, DPA |
-| **Google Workspace** | Messagerie, documents | UE / États-Unis | DPA, CCT |
-
-Le Prestataire informe le Client de tout changement de sous-traitant ultérieur.
-Le Client dispose de 15 jours pour s'y opposer pour un motif légitime.
+Le Prestataire informe immédiatement le Client si, selon lui, une instruction
+constitue une violation du RGPD ou d'autres dispositions relatives à la protection
+des données.
 
 ---
 
-## 3. Mesures techniques et organisationnelles
+## 3. Confidentialité
+
+Le Prestataire veille à ce que les personnes autorisées à traiter les données
+à caractère personnel s'engagent à respecter la confidentialité ou soient soumises
+à une obligation légale appropriée de confidentialité.
+
+---
+
+## 4. Sous-traitants ultérieurs
+
+Le Client autorise le recours aux sous-traitants ultérieurs listés ci-dessous.
+Le Prestataire informe le Client de tout changement envisagé concernant l'ajout
+ou le remplacement de sous-traitants ultérieurs. Le Client dispose de **15 jours**
+pour émettre une objection motivée.
+
+| Sous-traitant | Rôle | Localisation | Garanties |
+|---------------|------|-------------|-----------|
+| **Make** (Celonis) | Automatisation | UE / US (AWS) | DPA, CCT |
+| **n8n** (n8n GmbH) | Automatisation (cloud/self-host) | UE (Francfort) si cloud | DPA |
+| **Pipedrive** | CRM | US (AWS) | DPA, CCT |
+| **HubSpot** | CRM | US | DPA, CCT |
+| **Brevo** (Sendinblue) | Emailing | France / UE | DPA, hébergement UE |
+| **Mistral AI** | LLM (classification, rédaction) | UE | DPA, pas d'entraînement sur données API |
+| **OpenAI** | LLM (classification, rédaction) | US | DPA, CCT, opt-out entraînement |
+| **Scaleway** | Hébergement (self-host) | France / UE | Certifications, DPA |
+| **OVHcloud** | Hébergement (self-host) | France / UE | Certifications, DPA |
+| **Google Workspace** | Messagerie, documents | UE / US | DPA, CCT |
+
+> ⚠️ La localisation effective et les garanties dépendent de la configuration retenue
+> pour chaque projet. Le tableau ci-dessus sera précisé projet par projet dans le
+> Document de Périmètre.
+
+### Obligations répercutées
+
+Le Prestataire impose à chaque sous-traitant ultérieur, par contrat écrit, les
+mêmes obligations en matière de protection des données que celles définies dans
+la présente annexe, notamment en ce qui concerne les garanties suffisantes quant
+à la mise en œuvre de mesures techniques et organisationnelles appropriées.
+
+Si un sous-traitant ultérieur ne remplit pas ses obligations, le Prestataire
+demeure pleinement responsable envers le Client de l'exécution des obligations
+du sous-traitant ultérieur.
+
+---
+
+## 5. Mesures techniques et organisationnelles
 
 | Domaine | Mesure |
 |---------|--------|
@@ -54,7 +92,7 @@ Le Client dispose de 15 jours pour s'y opposer pour un motif légitime.
 
 ---
 
-## 4. Notification d'incident
+## 6. Notification d'incident
 
 En cas de violation de données à caractère personnel :
 - Notification au Client dans un délai maximal de **24 heures**
@@ -65,40 +103,59 @@ En cas de violation de données à caractère personnel :
 
 ---
 
-## 5. Sort des données en fin de contrat
+## 7. Assistance au Client
 
-Au terme du contrat :
-- Restitution des données dans un format standard (CSV, JSON, export CRM)
-- Suppression des données hébergées sous 30 jours
-- Attestation de suppression fournie sur demande
-- Les workflows sont désactivés et exportés
+Le Prestataire assiste le Client, dans la mesure du possible, pour :
+
+- Le respect de son obligation de répondre aux demandes d'exercice des droits
+  des personnes : accès, rectification, opposition, limitation, portabilité
+- La réalisation d'**analyses d'impact relatives à la protection des données**
+  (AIPD / DPIA) lorsque le traitement présente un risque élevé
+- Les **consultations préalables** auprès de la CNIL, le cas échéant
 
 ---
 
-## 6. Registre des traitements
+## 8. Audits et informations
+
+Le Prestataire met à la disposition du Client toutes les informations nécessaires
+pour démontrer le respect des obligations prévues à l'article 28 du RGPD.
+
+Il permet des **audits**, y compris des inspections, menés par le Client ou un
+mandataire qualifié, et y contribue. Ces audits sont planifiés avec un préavis
+raisonnable et ne doivent pas perturber de manière disproportionnée les activités
+du Prestataire.
+
+---
+
+## 9. Registre des traitements
 
 Le Prestataire tient un registre des activités de traitement pour son activité
 propre (prospection, gestion commerciale, facturation) et pour chaque client.
 
-Le Client est responsable de son propre registre des traitements.
-Le Prestataire fournit les informations nécessaires pour le compléter.
+Le Client est responsable de son propre registre. Le Prestataire fournit les
+informations nécessaires pour le compléter.
 
 ---
 
-## 7. Droits des personnes
+## 10. Sort des données en fin de contrat
 
-Le Prestataire assiste le Client dans le respect de son obligation de donner suite
-aux demandes d'exercice des droits des personnes : droit d'accès, de rectification,
-d'opposition, de limitation, de portabilité, dans la mesure du possible compte tenu
-de la nature du traitement.
+Au terme du contrat, selon le choix du Client :
+
+- Restitution des données dans un format standard (CSV, JSON, export CRM)
+- Suppression de toutes les copies des données à caractère personnel
+- Attestation de suppression fournie sur demande
+- Les workflows sont désactivés et exportés
+
+Ce traitement intervient dans un délai maximal de **30 jours** suivant la fin
+du contrat, sauf obligation légale de conservation.
 
 ---
 
-## 8. Contact et DPO
+## 11. Contact
 
 - **Prestataire :** Donopot — donopot@pm.me
-- **Client :** [Contact DPO ou responsable RGPD]
+- **Client :** [Contact DPO ou responsable RGPD — à compléter]
 
 ---
 
-*Cette annexe est signée conjointement avec le contrat principal.*
+*Cette annexe est signée conjointement avec le contrat principal et le Document de Périmètre.*
