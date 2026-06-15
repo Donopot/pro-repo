@@ -1,0 +1,23 @@
+{
+  "name": "pro-repo",
+  "version": "1.0.0",
+  "description": "**J'aide les PME françaises à répondre à leurs leads en quelques minutes, à fiabiliser leur CRM et à traiter une part de leur support client sans recruter. Le tout avec un cadrage RGPD clair et une maintenance simple.**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Donopot/pro-repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Donopot/pro-repo/issues"
+  },
+  "homepage": "https://github.com/Donopot/pro-repo#readme",
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}
