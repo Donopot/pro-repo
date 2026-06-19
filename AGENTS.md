@@ -26,9 +26,22 @@ pro-repo/
 │   ├── contrat.md      ← Contrat de prestation
 │   ├── annexe-rgpd.md  ← Annexe article 28 RGPD
 │   ├── sla.md           ← Annexe maintenance et SLA
-│   └── outreach.md      ← Scripts commerciaux
-├── scripts/             ← Validations locales et CI
-└── .github/workflows/   ← Validation et déploiement GitHub Pages
+│   ├── outreach.md      ← Scripts commerciaux
+│   ├── scripts-vente.md ← Scripts de vente complets (10 scripts)
+│   ├── offre-audit.md   ← Offre d'entrée « Audit Automatisation »
+│   ├── proposition-type.md ← Modèle de proposition commerciale
+│   ├── process-livraison.md ← Processus de livraison (cadrage → hypercare)
+│   └── plan-30-jours.md ← Plan d'action 30 jours
+├── scripts/             ← Scraping, génération, validation
+│   ├── scrape-pj.js     ← Scraper Playwright PagesJaunes
+│   ├── find-emails.py   ← Extracteur d'emails
+│   ├── generate-emails.py ← Générateur de mails personnalisés
+│   └── validate_repo.py ← Validateur CI
+├── crm/                 ← Fichiers de prospection
+│   ├── agences-cibles.csv ← 100 agences cibles
+│   └── pj-sud-paris.csv  ← 166 agences prospectées (tél, email, statut)
+├── demos/               ← Démos Make, guides
+└── .github/workflows/   ← Validation et déploiement
 ```
 
 ---
